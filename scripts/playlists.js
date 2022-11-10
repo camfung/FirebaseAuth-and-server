@@ -1,7 +1,3 @@
-const getPlaylists = () => {
-
-}
-
 const callServer = () => {
     let doc;
     const xhr = new XMLHttpRequest();

@@ -107,11 +107,9 @@ app.get("/get_playlists", (req, res) => {
         'content-type': 'application/json',
         Authorization: `Bearer ${access_token}`,
         }
-    
-    
     })
     .then(response => {
-        data = [];
+        let data = [];
         for (let i = 0 ; i < 30; i++){
             data.push({
               name: response.data.items[i].name,
@@ -119,7 +117,10 @@ app.get("/get_playlists", (req, res) => {
               trackUrl: response.data.items[i].tracks.href,
             });
           }    
-        res.send(data)
+          let json = JSON.stringify(data);
+        //   fs.writeFileSync("playlistsNames.json");
+        let doc = fs.readFileSync("html/playlistsLanding.html", "utf-8")
+        // sendHtml("playlistsLanding", res);
         // res.redirect(`/get_playlist_tracks?href=${response.data.items[0].href}`)
     })
     .catch(error => {
@@ -141,8 +142,6 @@ app.get("/get_playlists", (req, res) => {
     }
     return text;
   };
-
-
 
 let sendHtml = (url, res) => {
     let doc = fs.readFileSync("html/" + url + ".html", "utf-8");
