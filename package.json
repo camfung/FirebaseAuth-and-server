@@ -1,0 +1,17 @@
+{
+  "name": "firebase-1800-project",
+  "version": "1.0.0",
+  "description": "* [General info](#general-info)\r * [Technologies](#technologies)\r * [Contents](#content)",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "C:\\\\Users\\\\camer\\\\OneDrive\\\\Desktop\\\\comp1800\\\\demos\\\\demo09"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
