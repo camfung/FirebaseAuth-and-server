@@ -102,7 +102,7 @@ app.get("/get_playlists", (req, res) => {
 
     axios({
         method: 'get',
-        url: 'https://api.spotify.com/v1/me/playlists?limit=50&offset=0',
+        url: 'https://api.spotify.com/v1/me/playlists?limit=20&offset=0',
         headers: {
         'content-type': 'application/json',
         Authorization: `Bearer ${access_token}`,
@@ -119,7 +119,7 @@ app.get("/get_playlists", (req, res) => {
         //     });
         //   }    
         //   let json = JSON.stringify(data);
-        //   fs.writeFileSync("playlistsNames.json");
+        fs.writeFileSync("./data/playlistsNames.json", JSON.stringify(response.data.items));
 
         let doc = fs.readFileSync("html/playlistsLanding.html", "utf-8")
         res.send(doc);
@@ -130,6 +130,11 @@ app.get("/get_playlists", (req, res) => {
     })
     });
       
+app.get("/get_playlists_json", (req, res) => {
+  let playlists_json = fs.readFileSync("data/playlistsNames.json");
+  let playlists_json_parsed = JSON.parse(playlists_json);
+  res.send(playlists_json_parsed);
+})
 
 /**
  * Generates a random string containing numbers and letters
