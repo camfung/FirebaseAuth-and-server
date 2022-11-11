@@ -109,18 +109,20 @@ app.get("/get_playlists", (req, res) => {
         }
     })
     .then(response => {
-        let data = [];
-        for (let i = 0 ; i < 30; i++){
-            data.push({
-              name: response.data.items[i].name,
-              imageLink: response.data.items[0].images[0].url,
-              trackUrl: response.data.items[i].tracks.href,
-            });
-          }    
-          let json = JSON.stringify(data);
+        // let data = [];
+        // console.log(response.data.items)
+        // for (let i = 0 ; i < Object.keys(response.data.items).length; i++){
+        //     data.push({
+        //       name: response.data.items[i].name,
+        //       imageLink: response.data.items[i].images[0].url,
+        //       trackUrl: response.data.items[i].tracks.href,
+        //     });
+        //   }    
+        //   let json = JSON.stringify(data);
         //   fs.writeFileSync("playlistsNames.json");
+
         let doc = fs.readFileSync("html/playlistsLanding.html", "utf-8")
-        // sendHtml("playlistsLanding", res);
+        res.send(doc);
         // res.redirect(`/get_playlist_tracks?href=${response.data.items[0].href}`)
     })
     .catch(error => {
