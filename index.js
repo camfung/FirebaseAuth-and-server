@@ -86,6 +86,7 @@ app.get("/callback", (req, res) => {
         .then(response => {
           if (response.status === 200) {
             access_token = response.data.access_token;
+
             // res.send(access_token)
             res.redirect("/get_playlists")
             // res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
@@ -150,10 +151,37 @@ app.get("/get_playlists_json", (req, res) => {
     return text;
   };
 
+
+app.get("/get_playlist_tracks", (req, res) => {
+  let href = req.query.href
+  console.log(href)
+  axios({
+    method: 'get',
+    url: href + "/tracks?fields=items(track(name))",
+    headers: {
+      "Accept" : "application/json",
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access_token}`,
+    }
+  })
+  .then(response => {
+    data = [];
+    for (let i =0 ; i < 50; i++){
+      data.push(response.data.items[i].track.name)
+    }
+    res.send(data);
+  })
+  .catch(error => {
+    res.send(error)
+  })
+})
+
 let sendHtml = (url, res) => {
     let doc = fs.readFileSync("html/" + url + ".html", "utf-8");
     res.send(doc);
 }
+
+
 
 let port = 8000;
 app.listen(port, () => {
