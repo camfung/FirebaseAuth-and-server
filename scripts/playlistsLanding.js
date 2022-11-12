@@ -4,13 +4,13 @@ const xhr = new XMLHttpRequest();
 xhr.onload = function() {
     let doc = JSON.parse(this.responseText)
     const template = document.querySelector("#playlist-template");
+    console.log(doc.length)
     for (let i = 0 ; i < doc.length; i++){
-      let url = doc[i].images[0].url
-      let newEle = document.createElement("div");
-      console.log(url)
-      // newEle.innerHTML = url
-      newEle.innerHTML = "<img src='" + url + "'>"
-      // newEle.innerHTML = doc[i].images[0].url;
+      let url = doc[i].images[0].url;
+      let name = doc[i].name;
+      let newEle = template.content.cloneNode(true);
+      newEle.querySelector("#name").innerHtml = "ten thouseand" + i;
+      newEle.querySelector("#image").src = url;
 
       document.querySelector("#playlists").appendChild(newEle);
       
