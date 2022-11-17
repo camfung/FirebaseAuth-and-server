@@ -46,12 +46,13 @@ fetch("http://localhost:8000/get_playlists_json")
     let playlists = document.querySelectorAll(".playlist");
     for (ele of playlists){
       ele.addEventListener("click", (e) => {
-        let url = e.target.nextSibling.nextSibling.id;
-        fetch("http://localhost:8000/get_playlist_tracks?href="+url)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-        })
+        let url = e.target.nextSibling.nextSibling.innerHtml;
+        console.log(url)
+        // fetch("http://localhost:8000/get_playlist_tracks?href="+url)
+        // .then(response => response.json())
+        // .then(data => {
+        //   console.log(data);
+        // })
       })
     }
 })
